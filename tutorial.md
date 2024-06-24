@@ -6,7 +6,7 @@
 
 <walkthrough-disable-features toc></walkthrough-disable-features>
 
-# Platform Engineering Handson 入門編
+# Cloud Workstations ハンズオン
 
 ## Google Cloud プロジェクトの設定、確認
 
