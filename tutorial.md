@@ -96,7 +96,7 @@ Google Cloud では利用したい機能ごとに、有効化を行う必要が�
 〜finished successfully というメッセージが出たら正常に終了しています。
 
 ```bash
-gcloud services enable cloudbuild.googleapis.com container.googleapis.com artifactregistry.googleapis.com clouddeploy.googleapis.com workstations.googleapis.com
+gcloud services enable cloudbuild.googleapis.com container.googleapis.com artifactregistry.googleapis.com clouddeploy.googleapis.com workstations.googleapis.com run.googleapis.com
 ```
 
 **GUI**: [API ライブラリ](https://console.cloud.google.com/apis/library?project={{project-id}})
@@ -368,8 +368,19 @@ gcloud config set project ${PROJECT_ID}
 提供されている Dockerfile を利用して、コンテナ化を行います。
 
 ```bash
-gcloud builds submit . --tag asia-northeast1-docker.pkg.dev/${PROJECT_ID}/spring-app/spring-app:v1.0.0
+gcloud run deploy spring --source=.
 ```
+途中、インタラクティブに y/N の確認がありますので、 y をタイプして、Enter を入力してください。
+数分後、環境に URL が払い出されますので、払い出された URL をコピーして、
+ブラウザの別のタブでアクセスします。
+URLの出力例は以下です。
+```
+Done.                                                                                                                                             
+Service [spring] revision [spring-00001-ntq] has been deployed and is serving 100 percent of traffic.
+Service URL: https://spring-[].a.run.app
+```
+
+Greeting というメッセージが確認できましたら、本ハンズオンは完了となります。
 
 ## **Configurations!**
 これで、ハンズオンは完了となります。
