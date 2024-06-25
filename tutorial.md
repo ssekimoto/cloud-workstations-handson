@@ -166,7 +166,7 @@ gcloud compute routers nats create ws-nat \
 
 ### **Lab-00-05. WS クラスタ の作成**
 
-後半の Lab02 で使う Cloud Workstations 用のクラスタを用意しておきます。
+Cloud Workstations 用のクラスタを用意しておきます。
 この作業は同一のリージョンで一度だけ必要で、作成完了まで 25 分程度かかります。
 
 ```bash
@@ -348,32 +348,6 @@ gcloud config set project ${PROJECT_ID}
 ```bash
 gcloud builds submit . --tag asia-northeast1-docker.pkg.dev/${PROJECT_ID}/spring-app/spring-app:v1.0.0
 ```
-
-続いて GKE へのデプロイを行います。
-左側のファイル一覧から `complete/k8s.yaml` を開きます。
-17行目の `asia-northeast1-docker.pkg.dev/${PROJECT_ID}/spring-app/spring-app:v1.0.0` の`${PROJECT_ID}`を実際のプロジェクトID に置き換えます。(Cloud Workstations は編集すると即時反映となるため、保存は不要です。）
-
-GKE への接続を行います
-
-```bash
-gcloud container clusters get-credentials dev-cluster --region asia-northeast1 --project ${PROJECT_ID}
-```
-
-GKE へのデプロイを実施します。
-
-```bash
-kubectl apply -f k8s.yaml 
-```
-
-数分後、以下でデプロイ後の確認を行います。
-
-```bash
-kubectl get all 
-```
-
-期待通り Running になっていれば、開発者として、GKE への初期デプロイを完了することができました。
-
-
 
 ## **Configurations!**
 これで、ハンズオンは完了となります。
