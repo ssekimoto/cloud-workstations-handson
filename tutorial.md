@@ -10,7 +10,7 @@
 
 ## Google Cloud プロジェクトの設定、確認
 
-### **1. 対象の Google Cloud プロジェクトを設定**
+### **01. 対象の Google Cloud プロジェクトを設定**
 
 ハンズオンを行う Google Cloud プロジェクトのプロジェクト ID を環境変数に設定し、以降の手順で利用できるようにします。 **(右辺の [PROJECT_ID] を手動で置き換えてコマンドを実行します)**
 
@@ -20,7 +20,7 @@ export PROJECT_ID=[PROJECT_ID]
 
 `プロジェクト ID` は [ダッシュボード](https://console.cloud.google.com/home/dashboard) に進み、左上の **プロジェクト情報** から確認します。
 
-### **2. プロジェクトの課金が有効化されていることを確認する**
+### **02. プロジェクトの課金が有効化されていることを確認する**
 
 ```bash
 gcloud beta billing projects describe ${PROJECT_ID} | grep billingEnabled
@@ -30,7 +30,29 @@ gcloud beta billing projects describe ${PROJECT_ID} | grep billingEnabled
 
 出力結果の `billingEnabled` が **true** になっていることを確認してください。**false** の場合は、こちらのプロジェクトではハンズオンが進められません。別途、課金を有効化したプロジェクトを用意し、本ページの #1 の手順からやり直してください。
 
-## **環境準備**
+## ハンズオン資材の準備
+
+
+### **01. ワークショップ資材をダウンロードする**
+
+```bash
+git clone https://github.com/ssekimoto/cloud-workstations-handson.git
+```
+
+### **02. チュートリアル資材があるディレクトリに移動する**
+
+```bash
+cd ~/cloud-workstations-handson 
+```
+
+### **03. チュートリアルを開く**
+
+```bash
+teachme tutorial.md
+```
+
+
+## 環境準備
 
 <walkthrough-tutorial-duration duration=10></walkthrough-tutorial-duration>
 
@@ -94,7 +116,7 @@ gcloud config set compute/region asia-northeast1 && gcloud config set compute/zo
 ### **01. チュートリアル資材があるディレクトリに移動する**
 
 ```bash
-cd ~/gcp-getting-started-lab-jp/pfe-basic
+cd ~/cloud-workstations-handson 
 ```
 
 ### **02. チュートリアルを開く**
@@ -206,13 +228,13 @@ gcloud artifacts repositories create spring-app \
 今回はあらかじめ用意したサンプルコードを利用します。中身は以下で確認できます。
 
 ```bash
-cat lab-01/workstations/Dockerfile
+cat workstations/Dockerfile
 ```
 Cloud Build を利用して、Cloud Workstations コンテナイメージをビルドします。
 (赤字でメッセージが出ることがありますが、問題ございません。)
 
 ```bash
-gcloud builds submit lab-01/workstations/ \
+gcloud builds submit workstations/ \
   --tag asia-northeast1-docker.pkg.dev/${PROJECT_ID}/ws-repo/codeoss-spring:v1.0.0
 ```
 
