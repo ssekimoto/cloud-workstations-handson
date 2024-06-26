@@ -42,7 +42,7 @@ git clone https://github.com/ssekimoto/cloud-workstations-handson.git
 ### **02. チュートリアル資材があるディレクトリに移動する**
 
 ```bash
-cd ~/cloud-workstations-handson 
+cd ./cloud-workstations-handson 
 ```
 
 ### **03. チュートリアルを開く**
