@@ -370,6 +370,7 @@ gcloud config set project ${PROJECT_ID}
 ```bash
 gcloud run deploy spring --source=.
 ```
+"Please specify a region:" と表示されましたら、 4 とタイプして、Enter を入力してください。
 途中、インタラクティブに y/N の確認がありますので、 y をタイプして、Enter を入力してください。
 数分後、環境に URL が払い出されますので、払い出された URL をコピーして、
 ブラウザの別のタブでアクセスします。
