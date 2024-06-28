@@ -205,18 +205,20 @@ Platform Engineering の観点から、開発者に作成ずみの開発環境�
 
 ### **Lab-01-01. Artifact Registry 作成**
 Cloud Workstations イメージを保管するためにレポジトリを作成します。
+[yourname]を個人名に修正ください。
 
 ```bash
-gcloud artifacts repositories create ws-repo \
+gcloud artifacts repositories create ws-repo-[yourname] \
   --repository-format docker \
   --location asia-northeast1 \
   --description="Docker repository for Cloud workstations"
 ```
 
 ここで、Lab-02 で使うアプリケーション用の レポジトリも作成しておきます。
+[yourname]を個人名に修正ください。
 
 ```bash
-gcloud artifacts repositories create spring-app \
+gcloud artifacts repositories create spring-app-[yourname] \
   --repository-format docker \
   --location asia-northeast1 \
   --description="Docker repository for spring-app"
@@ -235,33 +237,35 @@ Cloud Build を利用して、Cloud Workstations コンテナイメージをビ�
 
 ```bash
 gcloud builds submit workstations/ \
-  --tag asia-northeast1-docker.pkg.dev/${PROJECT_ID}/ws-repo/codeoss-spring:v1.0.0
+  --tag asia-northeast1-docker.pkg.dev/${PROJECT_ID}/ws-repo-[yourname]/codeoss-spring:v1.0.0
 ```
 
 ### **Lab-02-03. Cloud Workstations イメージ Pull 用のサービスアカウントの設定**
 
 プライベートなカスタムイメージを利用するため、Artifact Registry から Pull できる権限を持つサービスアカウントを作成しておきます。
+[yourname]を個人名に修正ください。
 
 ```bash
-gcloud iam service-accounts create codeoss-customized-sa \
+gcloud iam service-accounts create codeoss-customized-sa-[yourname] \
   --display-name "Service Account for codeoss-customized config"
 ```
 サービスアカウントに権限を付与しておきます。今回は、Artifact Registry から Pull できる権限で十分なため、`artifactregistry.reader`を付与します。
-
+[yourname]を個人名に修正ください。
 
 ```bash
-gcloud artifacts repositories add-iam-policy-binding ws-repo \
+gcloud artifacts repositories add-iam-policy-binding ws-repo-[yourname] \
   --location asia-northeast1 \
-  --member serviceAccount:codeoss-customized-sa@${PROJECT_ID}.iam.gserviceaccount.com \
+  --member serviceAccount:codeoss-customized-sa-[yourname]@${PROJECT_ID}.iam.gserviceaccount.com \
   --role=roles/artifactregistry.reader
 ```
 
 ### **Lab-01-04. Cloud Workstations 構成の作成**
 
 開発者むけにカスタマイズしたコンテナイメージを利用して Cloud Workstations の構成を作成します。
+[yourname]を個人名に修正ください。
 
 ```bash
-gcloud workstations configs create codeoss-spring \
+gcloud workstations configs create codeoss-spring-[yourname] \
   --machine-type e2-standard-4 \
   --region asia-northeast1 \
   --cluster cluster-handson \
@@ -269,19 +273,20 @@ gcloud workstations configs create codeoss-spring \
   --shielded-integrity-monitoring \
   --shielded-secure-boot \
   --shielded-vtpm \
-  --service-account codeoss-customized-sa@${PROJECT_ID}.iam.gserviceaccount.com \
-  --container-custom-image asia-northeast1-docker.pkg.dev/${PROJECT_ID}/ws-repo/codeoss-spring:v1.0.0
+  --service-account codeoss-customized-sa-[yourname]@${PROJECT_ID}.iam.gserviceaccount.com \
+  --container-custom-image asia-northeast1-docker.pkg.dev/${PROJECT_ID}/ws-repo-[yourname]/codeoss-spring:v1.0.0
 ```
 
 ### **Lab-01-05. Workstations の作成**
 
 開発者むけに一台、Workstations を作成します。この作業は、通常、開発者ごとに行うことになります。
+[yourname]を個人名に修正ください。
 
 ```bash
-gcloud workstations create ws-spring-dev \
+gcloud workstations create ws-spring-dev-[yourname] \
   --region asia-northeast1 \
   --cluster cluster-handson \
-  --config codeoss-spring
+  --config codeoss-spring-[yourname]
 ```
 
 Lab-01 は完了となります。
@@ -291,7 +296,7 @@ Lab-01 は完了となります。
 ### **Lab-02-01. Workstations の起動**
 GUI での作業となります。
 ブラウザで新しいタブを開き、[Workstations一覧](https://console.cloud.google.com/workstations/list)を開きます。
-**My workstations** に表示される `ws-spring-dev`の 起動 をクリックします。
+**My workstations** に表示される `ws-spring-dev-[yourname]`の 起動 をクリックします。
 起動には数分程度かかります。
 ステータスが、稼働中になりましたら、開始をクリックします。新しいタブで Code OSS の Welcome 画面が開きます。初回は表示に少し時間がかかります。
 
@@ -372,7 +377,7 @@ gcloud config set compute/region asia-northeast1 && gcloud config set compute/zo
 提供されている Dockerfile を利用して、コンテナ化を行います。
 
 ```bash
-gcloud run deploy spring --source=.
+gcloud run deploy spring-[yourname] --source=.
 ```
 途中、インタラクティブに y/N の確認がありますので、 y をタイプして、Enter を入力してください。
 ロケーションを聞かれたら、
@@ -381,7 +386,7 @@ gcloud run deploy spring --source=.
 URLの出力例は以下です。
 ```
 Done.                                                                                                                                             
-Service [spring] revision [spring-00001-ntq] has been deployed and is serving 100 percent of traffic.
+Service [spring] revision [spring-[yourname]-00001-ntq] has been deployed and is serving 100 percent of traffic.
 Service URL: https://spring-[].a.run.app
 ```
 
