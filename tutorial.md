@@ -380,7 +380,7 @@ gcloud config set compute/region asia-northeast1 && gcloud config set compute/zo
 gcloud run deploy spring-[yourname] --source=.
 ```
 途中、インタラクティブに y/N の確認がありますので、 y をタイプして、Enter を入力してください。
-ロケーションを聞かれたら、
+"Please specify a region:" と表示されましたら、 4 とタイプして、Enter を入力してください。
 数分後、環境に URL が払い出されますので、払い出された URL をコピーして、
 ブラウザの別のタブでアクセスします。
 URLの出力例は以下です。
