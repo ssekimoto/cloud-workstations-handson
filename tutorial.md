@@ -365,12 +365,17 @@ export PROJECT_ID=[PROJECT_ID(自身のIDに置き換えます[]は不要です)
 gcloud config set project ${PROJECT_ID}
 ```
 
+```bash
+gcloud config set compute/region asia-northeast1 && gcloud config set compute/zone asia-northeast1-c
+```
+
 提供されている Dockerfile を利用して、コンテナ化を行います。
 
 ```bash
 gcloud run deploy spring --source=.
 ```
 途中、インタラクティブに y/N の確認がありますので、 y をタイプして、Enter を入力してください。
+ロケーションを聞かれたら、
 数分後、環境に URL が払い出されますので、払い出された URL をコピーして、
 ブラウザの別のタブでアクセスします。
 URLの出力例は以下です。
